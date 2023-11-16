@@ -119,7 +119,7 @@ while True:
     elif opcion == "4":
         reporteEquiposConNovedades()
     elif opcion == "5":
-        modificar_equipo()
+        agregar_equipo() 
     elif opcion == "6":
         
         break
