@@ -7,6 +7,7 @@ class Equipo:
         self.cargador = cargador  # Estado del cargador
         self.mouse = mouse  # Estado del mouse
         self.estado = estado  # Estado actual del equipo
+        self.hambiente = hambiente#estado actual del equipo
 
 # Definir una clase para almacenar la información de una novedad
 class Novedad:
@@ -25,8 +26,9 @@ def agregar_equipo():
     cargador = input("Ingrese el estado del cargador: ")  # Solicitar el estado del cargador
     mouse = input("Ingrese el estado del mouse: ")  # Solicitar el estado del mouse
     estado = input("Ingrese el estado actual del equipo: ")  # Solicitar el estado actual del equipo
+    hambiente = input("ingrese el hambiente:")#solicite el hambiente
 
-    equipo = Equipo(id, cargador, mouse, estado)  # Crear un objeto de la clase Equipo
+    equipo = Equipo(id, cargador, mouse, estado,hambiente)  # Crear un objeto de la clase Equipo
     equipos.append(equipo)  # Agregar el equipo a la lista de equipos
 
 # Definir una función para agregar una novedad
@@ -54,28 +56,30 @@ def buscar_equipo():
         print("Cargador:", equipo.cargador)  # Mostrar el estado del cargador del equipo
         print("Mouse:", equipo.mouse)  # Mostrar el estado del mouse del equipo
         print("Estado actual:", equipo.estado)  # Mostrar el estado actual del equipo
+        print("hambiente:", equipo.hambiente) #mostrar el hambiente actual del equipo
     else:
         print("No se encontró el equipo con el ID especificado.")  # Mostrar un mensaje si el equipo no se encuentra
 
 # Definir una función para mostrar un reporte de equipos con novedades
-def reporte_equipos_con_novedades():
-    equipos_con_novedades = []  # Crear una lista para almacenar los equipos con novedades
+def reporteEquiposConNovedades():
+    equiposConNovedades = []  # Crear una lista para almacenar los equipos con novedades
 
     for novedad in novedades:  # Recorrer la lista de novedades
-        equipos_con_novedades.append(novedad.equipo)  # Agregar el equipo relacionado a la lista de equipos con novedades
+        equiposConNovedades.append(novedad.equipo)  # Agregar el equipo relacionado a la lista de equipos con novedades
 
-    if len(equipos_con_novedades) == 0:  # Verificar si no hay equipos con novedades
+    if len(equiposConNovedades) == 0:  # Verificar si no hay equipos con novedades
         print("No hay equipos con novedades.")  # Mostrar un mensaje si no hay equipos con novedades
     else:
         print("Equipos con novedades:")  # Mostrar un mensaje si hay equipos con novedades
-        for equipo in equipos_con_novedades:  # Recorrer la lista de equipos con novedades
+        for equipo in equiposConNovedades:  # Recorrer la lista de equipos con novedades
             print("ID:", equipo.id)  # Mostrar el ID del equipo con novedades
             print("Cargador:", equipo.cargador)  # Mostrar el estado del cargador del equipo con novedades
             print("Mouse:", equipo.mouse)  # Mostrar el estado del mouse del equipo con novedades
             print("Estado actual:", equipo.estado)  # Mostrar el estado actual del equipo con novedades
+            print("hambiente:",equipo.hambiente)
 
 # Definir una función para modificar un equipo
-def modificar_equipo():
+def modificarEquipo():
     id = input("Ingrese el ID del equipo a modificar: ")  # Solicitar al usuario el ID del equipo a modificar
     equipo = next((e for e in equipos if e.id == id), None)  # Buscar el equipo en la lista de equipos
 
@@ -84,6 +88,7 @@ def modificar_equipo():
         cargador = input(f"Nuevo estado del cargador ({equipo.cargador}): ")  # Solicitar el nuevo estado del cargador
         mouse = input(f"Nuevo estado del mouse ({equipo.mouse}): ")  # Solicitar el nuevo estado del mouse
         estado = input(f"Nuevo estado actual del equipo ({equipo.estado}): ")  # Solicitar el nuevo estado actual del equipo
+       
 
         equipo.cargador = cargador if cargador else equipo.cargador  # Actualizar el estado del cargador del equipo
         equipo.mouse = mouse if mouse else equipo.mouse  # Actualizar el estado del mouse del equipo
@@ -102,10 +107,23 @@ while True:
     print("4. Mostrar equipos con novedades")
     print("5. Modificar equipo")
     print("6. Salir")
-    break
-else:
-    print("esa opcion no es valida , seleccione la opcion correcta ")
-    
-          
+
+    opcion = input("Seleccione una opción (1/2/3/4/5/6): ")
+
+    if opcion == "1":
+        agregar_equipo()
+    elif opcion == "2":
+        agregar_novedad()
+    elif opcion == "3":
+        buscar_equipo()
+    elif opcion == "4":
+        reporteEquiposConNovedades()
+    elif opcion == "5":
+        modificar_equipo()
+    elif opcion == "6":
+        
+        break
+    else:
+        print("Opción no válida. Por favor, seleccione una opción válida.")
 
     
