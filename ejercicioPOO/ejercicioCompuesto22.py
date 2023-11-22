@@ -1,75 +1,66 @@
 import datetime
 
+# Define una clase para almacenar información sobre un equipo
 class Equipo:
     def __init__(self, id, cargador, mouse, estado, ambiente):
-        self.id = id
-        self.cargador = cargador
-        self.mouse = mouse
-        self.estado = estado
-        self.ambiente = ambiente
+        self.id = id  # ID del equipo
+        self.cargador = cargador  # Estado del cargador
+        self.mouse = mouse  # Estado del mouse
+        self.estado = estado  # Estado actual del equipo
+        self.ambiente = ambiente  # Nuevo atributo: Ambiente del equipo
 
+# Define una clase para almacenar información sobre una novedad
 class Novedad:
     def __init__(self, fecha, descripcion, equipo):
-        self.fecha = fecha
-        self.descripcion = descripcion
-        self.equipo = equipo
+        self.fecha = fecha  # Fecha de la novedad
+        self.descripcion = descripcion  # Descripción de la novedad
+        self.equipo = equipo  # Equipo relacionado con la novedad
 
-equipos = []
-novedades = []
+# Listas para almacenar equipos y novedades
+equipos = []  # Lista para almacenar objetos de la clase Equipo
+novedades = []  # Lista para almacenar objetos de la clase Novedad
 
-def agregar_equipo():
-    id = input("Ingrese el ID del equipo: ")
-    cargador = input("Ingrese el estado del cargador: ")
-    mouse = input("Ingrese el estado del mouse: ")
-    estado = input("Ingrese el estado actual del equipo: ")
-    ambiente = input("Ingrese el ambiente del equipo: ")
+# Define una función para agregar un equipo
+def agregarEquipo():
+    id = input("Ingrese el ID del equipo: ")  # Solicitar al usuario el ID del equipo
+    cargador = input("Ingrese el estado del cargador: ")  # Solicitar el estado del cargador
+    mouse = input("Ingrese el estado del mouse: ")  # Solicitar el estado del mouse
+    estado = input("Ingrese el estado actual del equipo: ")  # Solicitar el estado actual del equipo
+    ambiente = input("Ingrese el ambiente del equipo: ")  # Solicitar el ambiente del equipo
 
-    equipo = Equipo(id, cargador, mouse, estado, ambiente)
-    equipos.append(equipo)
+    equipo = Equipo(id, cargador, mouse, estado, ambiente)  # Crear un objeto de la clase Equipo
+    equipos.append(equipo)  # Agregar el equipo a la lista de equipos
 
-def editar_equipo():
-    id = input("Ingrese el ID del equipo a editar: ")
-    equipo = next((e for e in equipos if e.id == id), None)
+# Define una función para agregar una novedad
+def agregarNovedad():
+    fecha = input("Ingrese la fecha de la novedad: ")  # Solicitar la fecha de la novedad
+    descripcion = input("Ingrese la descripción de la novedad: ")  # Solicitar la descripción de la novedad
+    equipoId = input("Ingrese el ID del equipo relacionado: ")  # Solicitar el ID del equipo relacionado
 
+    # Verificar si el equipo existe
+    equipo = next((e for e in equipos if e.id == equipoId), None)  # Buscar el equipo en la lista de equipos
     if equipo:
-        print("Equipo encontrado. A continuación, puede editar la información:")
-        cargador = input(f"Nuevo estado del cargador ({equipo.cargador}): ")
-        mouse = input(f"Nuevo estado del mouse ({equipo.mouse}): ")
-        estado = input(f"Nuevo estado actual del equipo ({equipo.estado}): ")
-        ambiente = input(f"Nuevo ambiente del equipo ({equipo.ambiente}): ")
-
-        equipo.cargador = cargador if cargador else equipo.cargador
-        equipo.mouse = mouse if mouse else equipo.mouse
-        equipo.estado = estado if estado else equipo.estado
-        equipo.ambiente = ambiente if ambiente else equipo.ambiente
-
-        print("Información del equipo editada con éxito.")
-    else:
-        print("No se encontró el equipo con el ID especificado.")
-
-def eliminar_equipo():
-    id = input("Ingrese el ID del equipo a eliminar: ")
-    equipo = next((e for e in equipos if e.id == id), None)
-
-    if equipo:
-        equipos.remove(equipo)
-        print("Equipo eliminado con éxito.")
-    else:
-        print("No se encontró el equipo con el ID especificado.")
-
-def agregar_novedad():
-    fecha = input("Ingrese la fecha de la novedad: ")
-    descripcion = input("Ingrese la descripción de la novedad: ")
-    equipo_id = input("Ingrese el ID del equipo relacionado: ")
-
-    equipo = next((e for e in equipos if e.id == equipo_id), None)
-    if equipo:
-        novedad = Novedad(fecha, descripcion, equipo)
-        novedades.append(novedad)
+        novedad = Novedad(fecha, descripcion, equipo)  # Crear un objeto de la clase Novedad
+        novedades.append(novedad)  # Agregar la novedad a la lista de novedades
     else:
         print("Equipo no encontrado. No se pudo agregar la novedad.")
 
-def mostrar_equipos_con_novedades():
+# Define una función para buscar un equipo
+def buscarEquipo():
+    id = input("Ingrese el ID del equipo a buscar: ")  # Solicitar al usuario el ID del equipo a buscar
+    equipo = next((e for e in equipos if e.id == id), None)  # Buscar el equipo en la lista de equipos
+
+    if equipo:
+        print("Información del equipo:")  # Mostrar la información del equipo
+        print("ID:", equipo.id)  # Mostrar el ID del equipo
+        print("Cargador:", equipo.cargador)  # Mostrar el estado del cargador del equipo
+        print("Mouse:", equipo.mouse)  # Mostrar el estado del mouse del equipo
+        print("Estado actual:", equipo.estado)  # Mostrar el estado actual del equipo
+    else:
+        print("No se encontró información del equipo.")
+
+# Define una función para mostrar equipos con novedades
+def mostrarEquiposConNovedades():
     equipos_con_novedades = [novedad.equipo for novedad in novedades]
 
     if len(equipos_con_novedades) == 0:
@@ -83,46 +74,26 @@ def mostrar_equipos_con_novedades():
             print("Estado actual:", equipo.estado)
             print("Ambiente:", equipo.ambiente)
 
-def buscar_equipo():
-    id = input("Ingrese el ID del equipo a buscar: ")
-    equipo = next((e for e in equipos if e.id == id), None)
-
-    if equipo:
-        print("Información del equipo:")
-        print("ID:", equipo.id)
-        print("Cargador:", equipo.cargador)
-        print("Mouse:", equipo.mouse)
-        print("Estado actual:", equipo.estado)
-        print("Ambiente:", equipo.ambiente)
-    else:
-        print("No se encontró el equipo con el ID especificado.")
-
 # Ejemplo de uso
 while True:
     print("\nOpciones:")
     print("1. Agregar equipo")
-    print("2. Editar equipo")
-    print("3. Eliminar equipo")
-    print("4. Agregar novedad")
-    print("5. Mostrar equipos con novedades")
-    print("6. Buscar equipo")
-    print("7. Salir")
+    print("2. Agregar novedad")
+    print("3. Buscar equipo")
+    print("4. Mostrar equipos con novedades")
+    print("5. Salir")
 
-    opcion = input("Seleccione una opción (1/2/3/4/5/6/7): ")
+    opcion = input("Seleccione una opción (1/2/3/4/5): ")
 
     if opcion == "1":
-        agregar_equipo()
+        agregarEquipo()
     elif opcion == "2":
-        editar_equipo()
+        agregarNovedad()
     elif opcion == "3":
-        eliminar_equipo()
+        buscarEquipo()
     elif opcion == "4":
-        agregar_novedad()
+        mostrarEquiposConNovedades()
     elif opcion == "5":
-        mostrar_equipos_con_novedades()
-    elif opcion == "6":
-        buscar_equipo()
-    elif opcion == "7":
         break
     else:
         print("Opción no válida. Por favor, seleccione una opción válida.")
