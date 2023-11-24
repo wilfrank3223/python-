@@ -1,6 +1,6 @@
 import datetime
 
-# Define una clase para almacenar información sobre un equipo
+# Definimos una clase para almacenar información sobre un equipo
 class Equipo:
     def __init__(self, id, cargador, mouse, estado, ambiente):
         self.id = id  # ID del equipo
@@ -9,7 +9,7 @@ class Equipo:
         self.estado = estado  # Estado actual del equipo
         self.ambiente = ambiente  # Nuevo atributo: Ambiente del equipo
 
-# Define una clase para almacenar información sobre una novedad
+# Definimos una clase para almacenar información sobre una novedad
 class Novedad:
     def __init__(self, fecha, descripcion, equipo):
         self.fecha = fecha  # Fecha de la novedad
@@ -24,6 +24,16 @@ novedades = []  # Lista para almacenar objetos de la clase Novedad
 def agregarEquipo():
     id = input("Ingrese el ID del equipo: ")  # Solicitar al usuario el ID del equipo
     cargador = input("Ingrese el estado del cargador: ")  # Solicitar el estado del cargador
+    mouse = input("Ingrese el estado del mouse: ")  # Solicitar el estado del mouse
+    estado = input("Ingrese el estado actual del equipo: ")  # Solicitar el estado actual del equipo
+    ambiente = input("Ingrese el ambiente del equipo: ")  # Solicitar el ambiente del equipo
+
+    # Crear un objeto de la clase Equipo
+    equipo = Equipo(id, cargador, mouse, estado, ambiente)
+    
+    # Agregar el equipo a la lista de equipos
+    equipos.append(equipo)
+    print("Equipo agregado con éxito.")
 
 # Define una función para agregar una novedad
 def agregarNovedad():
@@ -36,6 +46,7 @@ def agregarNovedad():
     if equipo:
         novedad = Novedad(fecha, descripcion, equipo)  # Crear un objeto de la clase Novedad
         novedades.append(novedad)  # Agregar la novedad a la lista de novedades
+        print("Novedad agregada con éxito.")
     else:
         print("Equipo no encontrado. No se pudo agregar la novedad.")
 
@@ -50,5 +61,11 @@ def buscarEquipo():
         print("Cargador:", equipo.cargador)  # Mostrar el estado del cargador del equipo
         print("Mouse:", equipo.mouse)  # Mostrar el estado del mouse del equipo
         print("Estado actual:", equipo.estado)  # Mostrar el estado actual del equipo
+        print("Ambiente:", equipo.ambiente)  # Mostrar el ambiente del equipo
     else:
-        print("No se encontro informacion del equipo ")
+        print("No se encontró información del equipo.")
+
+#  uso del código
+agregarEquipo()
+buscarEquipo()
+agregarNovedad()
